@@ -6,7 +6,7 @@ class Categoria(ClaseModelo):
     descripcion = models.CharField(
         max_length=100,
         help_text='Descripción de la Categoria',
-        inique=True
+        unique=True
     )
 
     def __str__(self):    #Cuando se carga categoria hace referencia a la descripción 
