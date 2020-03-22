@@ -10,4 +10,4 @@ class CategoriaView(LoginRequiredMixin, generic.ListView):
     model = Categoria
     template_name = "inv/categoria_list.html"
     content_object_name = "obj"
-    login_url = "bases:login"
+    login_url = 'bases:login'
