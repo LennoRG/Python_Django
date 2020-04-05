@@ -40,8 +40,8 @@
                 <tr>
                     <td>{{ item.id }}</td>
                     <td>{{ item.descripcion }}</td>
-                    <td>{{ item.estado | yesno:"Activo, Inactivo"}}</td>
-                    <td>{{ item.fc|date:"d/m/Y H:i:s"}}</td>
+                    <td>{{ item.estado|yesno:"Activo, Inactivo" }}</td>
+                    <td>{{ item.fc|date:"d/m/Y H:i:s" }}</td>
                     <td>{{ item.fm|date:"d/m/Y H:i:s" }}</td>
                     <td>
                         <a href="{% url 'inv:categoria_edit' item.id %}" class="btn btn-warning btn-circle" role="button"><i class="far fa-edit"></i></a>
