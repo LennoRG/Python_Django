@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Categoria
+from .models import Categoria, SubCategoria
 
 class CategoriaForms(forms.ModelForm):
     class Meta:
@@ -16,4 +16,21 @@ def __init__(self, *args, **kwars):
         self.fields[field].widget.attrs.update({
             'class':'form-control'
         })
+
+class SubCategoriaForms(forms.ModelForm):
+    class Meta:
+        model = SubCategoria
+        fields = ['categoria', 'descripcion', 'estado']
+        labels = {'descripcion': "Sub Categoría",
+                  "estado":"Estado"}
+        widget={'descripcion': forms.TextInput}
+
+    def __init__(self, *args, **kwars):
+        super().__init__(*args, **kwars)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+               'class':'form-control'
+            })
+
+        self.fields['categoria'].empty_label = "Seleccione Categoria"
         
