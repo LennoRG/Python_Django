@@ -19,7 +19,7 @@ def __init__(self, *args, **kwars):
 
 class SubCategoriaForms(forms.ModelForm):
     categoria = forms.ModelChoiceField(
-        queryset = Categoria.objects.filter(estado=True).order_by('descripcion')
+        queryset = Categoria.objects.filter(estado=True).order_by('descripcion') #No muestra las categorias inactivas
     )
     class Meta:
         model = SubCategoria
