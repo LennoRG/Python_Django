@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Categoria, SubCategoria
+from .models import Categoria, SubCategoria, Marca
 
 class CategoriaForms(forms.ModelForm):
     class Meta:
@@ -10,8 +10,8 @@ class CategoriaForms(forms.ModelForm):
                   "estado":"Estado"}
         widget={'descripcion': forms.TextInput}
 
-def __init__(self, *args, **kwars):
-    super().__init__(*args, **kwars)
+def __init__(self, *args, **kwargs):
+    super().__init__(*args, **kwargs)
     for field in iter(self.fields):
         self.fields[field].widget.attrs.update({
             'class':'form-control'
@@ -28,12 +28,28 @@ class SubCategoriaForms(forms.ModelForm):
                   "estado":"Estado"}
         widget={'descripcion': forms.TextInput}
 
-    def __init__(self, *args, **kwars):
-        super().__init__(*args, **kwars)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
                'class':'form-control'
             })
 
         self.fields['categoria'].empty_label = "Seleccione Categoria"
+
+class MarcaForm(forms.ModelForm):
+    class Meta:
+        model=Marca
+        fields = ['descripcion','estado']
+        labels = {'descipcion': "Descripción de la Marca",
+                 "estado": "Estado"}
+        widget = {'descripcion': forms.TextInput()}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+                'class': 'forms-control'
+            })
+        
         
