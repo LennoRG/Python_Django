@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Categoria, SubCategoria, Marca
+from .models import Categoria, SubCategoria, Marca, UnidadMedida
 
 class CategoriaForms(forms.ModelForm):
     class Meta:
@@ -51,5 +51,38 @@ class MarcaForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class': 'forms-control'
             })
+
+class UMForm(forms.ModelForm):
+    class Meta:
+        model = UnidadMedida
+        fields = ['descripcion','estado']
+        labels = {'descipcion': "Descripción de la Marca",
+                 "estado": "Estado"}
+        widget = {'descripcion': forms.TextInput()}
         
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+                'class': 'forms-control'
+            })
+
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ['codigo', 'codigo_barra', 'descripcion', 'estado',\
+            'precio', 'existencia', 'ultima_compra',
+            'marca', 'subcategoria', 'unidad_medida']
+        exclude = ['um', 'fm', 'uc', 'fc']
+        widget = {'descripcion': forms.TextInput()}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+                'class': 'forms-control'
+            })
+
+        self.fields['ultima_compra'].widget.attrs['readonly'] = True
+        self.fields['existencia'].widget.attrs['readonly'] = True
         
